@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Register</title>
+<script src="{{ url_for('static',filename='jquery.js') }}"></script>
+<link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfont-->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<!--dropdown-->
+<script src="{{ url_for('static',filename ='js/jquery-1.11.1.min.js') }}"></script>
+<script>
+	$(function (){
+		
+		var can_submit = false;
+		$("#btn2").prop("disabled", true);
+		$("form").submit(function(){
+			return can_submit;
+		});
+		$('input[name="uname"]').blur(function(){
+			var uname = $(this).val();
+			uname = uname.replace(/^\s+|\s+$/gm,"");
+			if (uname===""){
+				//用户名为空
+				
+				$("#aa").css("color","red");
+				$("#aa").text("*用户名不能为空");
+				can_submit = false;
+				return;
+			};
+			if (uname.length <2 || uname.length >8){
+				//用户名不为空
+				
+				$("#aa").css("color","red");
+				can_submit = false;
+				$("#aa").text("*用户名最少由2位，最多8位的非空字符串符合或数字组成");
+				return;
+
+			};
+			//校验用户名,通过AJAx发送请求给服务器
+			$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=UTF-8",
+				dataType: "json",
+				url:"/check_uname",
+				data:"uname=" + uname,
+				timeout:1000,
+				success: function(data){
+					if (data["error"] === 0){
+						$("#aa").text("*");
+						$("#aa").css("color","green");
+
+						if ($("#uname").val().length>0 & $("#pwd").val().length>0 & $("#ch_pwd").val().length>0 & $("#phone").val().length>0 & $("#email").val().length>0){
+						can_submit = true;}
+						
+					}
+					else {
+						
+						$("#aa").css("color","red");
+						$("#aa").text("*用户名已存在");
+						can_submit = false;
+					}
+					
+				},
+				error: function(){
+				}
+			});
+
+		});
+		$('input[name="pwd"]').blur(function(){
+			var password = $(this).val();
+			var unamea = password.replace(/^\s+|\s+$/gm,"");
+			var pwd_re1 = /^\s*?$/;
+			var pwd_re2 = /^[a-z]*?$/;
+			var pwd_re3 = /^[0-9]*?$/;
+			var pwd_re4 = /^\W*?$/;
+			if (unamea===""){
+				//用户密码为空
+				
+				$("#ab").css("color","red");
+				$("#ab").text("*密码不能为空");
+				can_submit = false;
+				return;
+			};
+			if (pwd_re1.test(password)==true || pwd_re2.test(password)==true ||  pwd_re2.test(password)==true || pwd_re3.test(password)==true || password.length > 16 || password.length<8){
+				
+				$("#ab").css("color","red");
+				$("#ab").text("*密码由最低8位，最高16位字母、数字和非空符号任意两种组成");
+				can_submit = false;
+				return;
+			}
+			else{
+				$("#ab").text("*");
+				$("#ab").css("color","green");
+				if ($("#uname").val().length>0 & $("#pwd").val().length>0 & $("#ch_pwd").val().length>0 & $("#phone").val().length>0 & $("#email").val().length>0){
+						can_submit = true;}
+				// if ($("#uname").val().length>0){
+				// can_submit = true;}
+				return;
+			}
+		})
+		$('input[name="ch_pwd"]').blur(function(){
+			if ($(this).val() === $("#pwd").val()){
+				$("#ac").text("*");
+				$("#ac").css("color","green");
+
+				if ($("#uname").val().length>0 & $("#pwd").val().length>0 & $("#ch_pwd").val().length>0 & $("#phone").val().length>0 & $("#email").val().length>0){
+						can_submit = true;}
+				return;
+			}
+			else{
+				
+				$("#ac").css("color","red");
+				$("#ac").text("*两次输入密码不一致");
+				can_submit = false;
+				return
+			}
+		})
+
+		$('input[name="email"]').blur(function(){
+			var email_re=/^.*?@\S+?\.[a-zA-Z]*?$/
+			var email1 = $(this).val()
+
+			if (email_re.test(email1)==true){
+
+				$("#af").text("*");
+				$("#af").css("color","green");
+
+				if ($("#uname").val().length>0 & $("#pwd").val().length>0 & $("#ch_pwd").val().length>0 & $("#phone").val().length>0 & $("#email").val().length>0){
+						can_submit = true;}
+				return;
+			}
+			else{
+				
+				$("#af").css("color","red");
+				$("#af").text("*请输入正确的邮箱");
+				can_submit = false;
+				return
+			}
+		})
+
+		var cont=1
+		$('input[name="phone"]').blur(function(){
+			
+			var phone_re = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/
+			var phone = $(this).val()
+			if (phone_re.test(phone)==true){
+
+				// if ($("#uname").val().length>0 & $("#password").val().length>0 & $("#password_chek").val().length>0){
+				// can_submit = true;}
+				if (cont==1){
+					++cont;
+					$("#btn2").prop("disabled", false);
+				}
+				
+				$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=UTF-8",
+				dataType: "json",
+				url:"/check_phone_t",
+				data:"phone=" + phone,
+				timeout:1000,
+				success: function(data){
+					if (data["error"] === 0){
+						$("#ad").text("*");
+						$("#ad").css("color","green");
+
+						if ($("#uname").val().length>0 & $("#pwd").val().length>0 & $("#ch_pwd").val().length>0 & $("#phone").val().length>0 & $("#email").val().length>0){
+						can_submit = true;}
+						
+					}
+					else {
+						
+						$("#ad").css("color","red");
+						$("#ad").text("*手机号已存在");
+						can_submit = false;
+					}
+					
+				},
+				error: function(){
+					alert("网络错误！")
+				}
+			});
+			return;
+			}
+			else{
+				
+				$("#ad").css("color","red");
+				$("#ad").text("*请输入正确的手机号");
+				can_submit = false;
+				$("#btn2").prop("disabled", true);
+				cont=1;
+				return;
+			}
+		});
+	
+	$("#btn2").click(aaa)
+		
+	var i = 59;  //开始停止的标志
+	function aaa(){
+		var phone_data =$("#phone").val()
+		if (i==59){
+		$.ajax({
+				type: "GET",
+				url: "/check_phone",
+				dataType: "json",
+				data: "phone_nb="+phone_data,
+				success: function(check_ma){
+					if (check_ma.code==0){
+						$('input[name="check_m"]').blur(function(){
+							if ($("#check").val().length>0){
+								$("#ae").text("*");
+								$("#be").css("color","green");
+
+								if ($("#uname").val().length>0 & $("#pwd").val().length>0 & $("#ch_pwd").val().length>0 & $("#phone").val().length>0 & $("#email").val().length>0){
+						can_submit = true;}
+								return;
+							}else{
+								
+								$("#ae").css("color","red");
+								$("#ae").text("*请输入验证码");
+								can_submit = false;
+								return;
+							}
+						})
+
+					}else{
+						
+						$("#ad").css("color","red");
+						$("#ad").text("*手机号不存在!");
+						can_submit = false;
+						return
+					}
+				},
+				error: function(){
+					alert("网络错误....");
+					return;
+				}
+
+			});}
+		if (phone_data.length>0){
+		
+
+		
+
+		clearTimeout(time); //清除上一次的定时器，否则会无限开多个
+		var time = setTimeout(aaa, 1000);
+		i -= 1;
+		$("#btn2").val("重新发送"+"("+i+"S"+")");
+		$("#btn2").prop("disabled", true);
+		if (i==0){
+			
+			i = 59;
+			$("#btn2").prop("disabled", false);
+			$("#btn2").html("重新发送");
+			clearTimeout(time);
+			return
+		}
+		}
+		
+	};
+	
+	});
+</script>
+</head>
+<body>
+<div class="header">
+	<div class='container'>
+		<div class="header_left">
+			<img src="{{ url_for('static',filename ='images/rate.png') }}" alt=""/>
+		</div>
+		<div class="logo">
+			<a href="/"><img src="{{ url_for('static',filename ='images/logo.png') }}" alt=""/>
+				<span>千寻</span>
+			</a>
+		</div>
+		<div class="header_right">
+			<ul class="header_user_info">
+			  <a class="login" href="login">
+				<li class="user_desc"><span class="m_1">已是用户 ? </span>登录</li>
+				<i class="user"> </i> 
+				<div class="clearfix"> </div>
+			  </a>
+			  <div class="clearfix"> </div>
+	    	</ul>
+			<a href="register.html" class="btn1 btn-1 btn1-1b">注册</a>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<div class="profile_banner">
+	<div class="container"> 
+	   <h3>注册</h3>
+	</div>
+</div>
+<div class='profiles'>
+  <div class="container">
+	   <div class="register">
+		  	  <form method="POST" action=""> 
+				 <div class="register-top-grid">
+					<h3>个人信息</h3>
+					 <div>
+						<span>昵称<label id="aa">*</label></span>
+						<input type="text" name="uname" id="uname"> 
+					 </div>
+					 <div>
+						<span>邮箱地址<label id="af">*</label></span>
+						<input type="text" name="email" id="email"> 
+					 </div>
+					 <div>
+						 <span>手机号<label id="ad">*</label></span>
+						 <input type="text" name="phone" id="phone">  <span><input type="button" value="发送验证码" id="btn2" style="background:#d26e8e;
+							color: #FFF;
+							font-size: 0.6em;
+							padding: 0.5em 2em;
+							transition: 0.5s all;
+							-webkit-transition: 0.5s all;
+							-moz-transition: 0.5s all;
+							-o-transition: 0.5s all;
+							display: inline-block;
+							text-transform: uppercase;
+							border:none;
+							outline:none;"></span>
+					 </div>
+					 <div>
+						<span>验证码<label id="ae">*</label></span>
+						<input type="text" name="check_m"> 
+					 </div>
+					 <div class="clearfix"> </div>
+					   <a class="news-letter" href="#">
+						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>订阅电子报</label>
+					   </a>
+					 </div>
+				     <div class="register-bottom-grid">
+						    <h3>登录信息</h3>
+							 <div>
+								<span>密码<label id="ab">*</label></span>
+								<input type="password" style="	border: 1px solid #EEE;
+								outline-color:#FF5B36;
+								width: 96%;
+								font-size: 1em;
+								padding: 0.5em;" name="pwd" id="pwd">
+							 </div>
+							 <div>
+								<span>确认密码<label id="ac">*</label></span>
+								<input type="password" style="	border: 1px solid #EEE;
+								outline-color:#FF5B36;
+								width: 96%;
+								font-size: 1em;
+								padding: 0.5em;" name="ch_pwd" id="ch_pwd">
+							 </div>
+							 <div class="clearfix"> </div>
+					 </div>
+					 <div class="clearfix"> </div>
+					 <div class="register-but">
+						
+							<input type="submit" value="提交" style="	background:#d26e8e;
+	color: #FFF;
+	font-size: 0.8em;
+	padding: 0.8em 2em;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
+	border:none;
+	outline:none;">
+							<div class="clearfix"> </div>
+						
+					 </div>
+				</form>
+
+		   </div>
+  </div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div class="cssmenu">
+		  <ul>
+			<li class="active"><a href="#">Home</a></li> 
+			<li><a href="about.html">About</a></li>
+			<li><a href="profiles.html">Add Profile</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		  </ul>
+	    </div>
+	    <div class="copy">
+			<p>Copyright &copy; 2016.Company name All rights reserved.More Templates </p>
+		</div>
+		<div class="social"> 
+			<ul class="footer_social">
+			  <li><a href="#"> <i class="fb"> </i> </a></li>
+			  <li><a href="#"> <i class="tw"> </i> </a></li>
+		   </ul>
+		</div>
+	    <div class='clearfix'> </div>
+	</div>
+</div>
+</body>
+</html>		

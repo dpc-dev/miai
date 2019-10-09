@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>家</title>
+<link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfont-->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<!--dropdown-->
+<script src="{{ url_for('static',filename ='js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename ='js/jquery.easydropdown.js') }}"></script>
+<!-- FlexSlider -->
+<link href="{{ url_for('static',filename ='css/flexslider.css') }}" rel='stylesheet' type='text/css' />
+							  <script defer src="{{ url_for('static',filename ='js/jquery.flexslider.js') }}"></script>
+							  <script type="text/javascript">
+								$(function(){
+								  SyntaxHighlighter.all();
+								});
+								$(window).load(function(){
+								  $('.flexslider').flexslider({
+									animation: "slide",
+									start: function(slider){
+									  $('body').removeClass('loading');
+									}
+								  });
+								});
+							  </script>
+<script src="{{ url_for('static',filename='jquery.js') }}"></script>
+<!-- FlexSlider -->
+<!--Animation-->
+
+<script src="{{ url_for('static',filename ='js/wow.min.js') }}"></script>
+<link href="{{ url_for('static',filename ='css/animate.css') }}" rel='stylesheet' type='text/css' />
+<script>
+	new WOW().init();
+</script>
+</head>
+<body>
+<div class="header wow fadeInUp" data-wow-delay="0.4s">
+	<div class='container'>
+		<div class="header_left">
+			<img src="{{ url_for('static',filename ='images/rate.png') }}" alt=""/>
+		</div>
+		<div class="logo">
+			<a href="index"><img src="{{ url_for('static',filename ='images/logo.png')}}" alt=""/>
+				<span>千寻</span>
+			</a>
+		</div>
+		<div class="header_right">
+			<ul class="header_user_info">
+			{% if name %}
+			<a class="login" href="#">
+			<li class="user_desc"><span class="m_1">欢 迎，{{ name }}!</span></li>
+			<div class="clearfix"> </div>
+			</a>
+			<div class="clearfix"> </div>
+		</ul>
+		<a href="log" class="btn1 btn-1 btn1-1b">注销</a>
+			{% else %}
+			  <a class="login" href="login">
+				<li class="user_desc"><span class="m_1">已有账户 ? </span>登陆</li>
+				<i class="user"> </i> 
+				<div class="clearfix"> </div>
+			  </a>
+			  <div class="clearfix"> </div>
+	    	</ul>
+			<a href="register.html" class="btn1 btn-1 btn1-1b">注册</a>
+			{% endif %}
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<div class="banner wow bounceInRight" data-wow-delay="0.4s">
+	<div class="container"> 
+	   <div class="banner_right">
+		   <h2>Find a perfect date</h2>
+		   <h1>分享您的完美时刻 </h1>
+		   <ul class="button">
+			 <li><a href="#" class="btn1 btn2 btn-1 btn1-1b">开始使用</a></li>
+			 <li><a href="#" class="btn1 btn2 btn-1 btn1-1b">了解更多</a></li>
+		   </ul>
+	   </div>
+	</div>
+</div>
+
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+<div class="content_bottom">
+	<div class="container">
+	  <div class="box1">
+		<div class="col-md-4 wow fadeInLeft" data-wow-delay="0.4s">
+		  <div class="grid_4"><a href="single.html">
+			<h4><span class="m_3">Leonardo , </span> Manager-usa</h4>
+			<img src="{{ url_for('static',filename ='images/pic1.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
+			<ul class="category_desc">
+			   <li class="cate_head">Based in 1.100 votes</li>
+			   <li class="cate_right">
+			   	 <ul class="list1">
+			   	    <li><i class="heart"> </i></li>
+			   	    <li><i class="heart"> </i></li>
+			   	    <li><i class="heart"> </i></li>
+			   	    <li><i class="heart"> </i></li>
+			   	 </ul>
+			   </li>
+			   <div class="clearfix"> </div>
+			</ul>
+			<h5>完整档案</h5>
+		</a> </div>
+		</div>
+		<div class="col-md-4 wow fadeInUp" data-wow-delay="0.4s">
+		   <div class="grid_4"><a href="single.html">
+			<h4><span class="m_3">luke ,</span>engineer-usa</h4>
+			<img src="{{ url_for('static',filename ='images/pic2.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
+			<ul class="category_desc">
+			   <li class="cate_head">Based in 956 votes</li>
+			   <li class="cate_right">
+			   	 <ul class="list1">
+			   	   <li><i class="heart"> </i></li>
+			   	   <li><i class="heart"> </i></li>
+			   	   <li><i class="heart"> </i></li>
+			   	 </ul>
+			   </li>
+			   <div class="clearfix"> </div>
+			</ul>
+			<h5>完整档案</h5>
+		  </a></div>
+	    </div>
+		<div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
+		  <div class="grid_4"><a href="single.html">
+			<h4><span class="m_3">max ,</span>security-usa</h4>
+			<img src="{{ url_for('static',filename ='images/pic3.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
+			<ul class="category_desc">
+			   <li class="cate_head">Based in 900 votes</li>
+			   <li class="cate_right">
+			   	 <ul class="list1">
+			   	    <li><i class="heart"> </i></li>
+			   	    <li><i class="heart"> </i></li>
+			   	    <li><i class="heart"> </i></li>
+			   	 </ul>
+			   </li>
+			   <div class="clearfix"> </div>
+			</ul>
+			<h5>完整档案</h5>
+		  </a></div>
+		</div>
+
+
+		<div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
+			<div class="grid_4"><a href="single.html?{{other}}">
+			  <h4><span class="m_3">{{ ture_name }},{{ job }},{{ location }}</span>security-usa</h4>
+			  
+			  <img src="{{url_for('static',filename =head_p)}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
+			  <ul class="category_desc">
+				 <li class="cate_head">爱好：{{ hobby }}</li>
+				 <li class="cate_right">
+					  <ul class="list1">
+						 <li><i class="heart"> </i></li>
+						 <li><i class="heart"> </i></li>
+						 <li><i class="heart"> </i></li>
+					  </ul>
+				 </li>
+				 <div class="clearfix"> </div>
+			  </ul>
+			  <h5>完整档案</h5>
+			</a></div>
+		  </div>
+
+		  <div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
+			<div class="grid_4"><a href="single.html">
+			  <h4><span class="m_3">max ,</span>security-usa</h4>
+			  <img src="{{ url_for('static',filename ='images/pic3.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
+			  <ul class="category_desc">
+				 <li class="cate_head">Based in 900 votes</li>
+				 <li class="cate_right">
+					  <ul class="list1">
+						 <li><i class="heart"> </i></li>
+						 <li><i class="heart"> </i></li>
+						 <li><i class="heart"> </i></li>
+					  </ul>
+				 </li>
+				 <div class="clearfix"> </div>
+			  </ul>
+			  <h5>完整档案</h5>
+			</a></div>
+		  </div>
+		
+		<div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
+			<div class="grid_4"><a href="single.html">
+			  <h4><span class="m_3">max ,</span>security-usa</h4>
+			  <img src="{{ url_for('static',filename ='images/pic3.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
+			  <ul class="category_desc">
+				 <li class="cate_head">Based in 900 votes</li>
+				 <li class="cate_right">
+					  <ul class="list1">
+						 <li><i class="heart"> </i></li>
+						 <li><i class="heart"> </i></li>
+						 <li><i class="heart"> </i></li>
+					  </ul>
+				 </li>
+				 <div class="clearfix"> </div>
+			  </ul>
+			  <h5>完整档案</h5>
+			</a></div>
+		  </div>
+		<div class="clearfix"> </div>
+	  </div>
+	  
+	  <div class='span1'>
+		  <select class="dropdown" tabindex="10" data-settings='{"wrapperClass":"metro1"}'>
+		    <option value="0">More Profiles</option>	
+			<option value="1">Tincidunt</option>
+			<option value="2">Magna</option>
+			<option value="3">Lectores </option>
+			<option value="4">Insitam</option>
+			<option value="5">Claritatem </option>
+			<option value="5"></option>
+			<option value="5"></option>
+		  </select>
+	  </div>
+	  <div class='clearfix'> </div>
+	  <div class="search wow bounceInUp" data-wow-delay="0.4s">
+   	    <h3>寻找你的ta ? </h3>
+   	    <form>
+		 <span>
+		   <div class="search-box">
+		   	<i class="search-icon"> </i>
+		    <input type="text" value="Type something here..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type something here...';}">
+		   </div>
+		   <input name="submit" type="submit" id="submit" value="Search">
+		 </span>	
+		<div class="clearfix"> </div>
+	    </form>
+	   <h4>Disclaimer</h4>
+	   <p class="m_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+       <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum. </p>
+      </div>
+   </div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div class="cssmenu wow fadeInLeft" data-wow-delay="0.4s">
+		  <ul>
+			<li class="active"><a href="#">Home</a></li> 
+			<li><a href="about.html">About</a></li>
+			<li><a href="profiles.html">Add Profile</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		  </ul>
+	    </div>
+	    <div class="copy wow fadeInUp" data-wow-delay="0.4s">
+			<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+		</div>
+		<div class="social wow fadeInRight" data-wow-delay="0.4s"> 
+			<ul class="footer_social">
+			  <li><a href="#"> <i class="fb"> </i> </a></li>
+			  <li><a href="#"> <i class="tw"> </i> </a></li>
+		   </ul>
+		</div>
+	    <div class='clearfix'> </div>
+	</div>
+</div>
+</body>
+</html>		

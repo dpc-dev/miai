@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Login</title>
+<link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="{{url_for('static',filename ='css/style.css')}}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfont-->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<!--dropdown-->
+<script src="{{url_for('static',filename ='js/jquery-1.11.1.min.js')}}"></script>
+</head>
+<body>
+<div class="header">
+	<div class='container'>
+		<div class="header_left">
+			<img src="{{url_for('static',filename ='images/rate.png')}}" alt=""/>
+		</div>
+		<div class="logo">
+			<a href="index.html"><img src="{{url_for('static',filename ='images/logo.png')}}" alt=""/>
+				<span>千寻</span>
+			</a>
+		</div>
+		<div class="header_right">
+			<ul class="header_user_info">
+			  <a class="login" href="login.html">
+				<li class="user_desc"><span class="m_1">已是用户? </span>登录</li>
+				<i class="user"> </i> 
+				<div class="clearfix"> </div>
+			  </a>
+			  <div class="clearfix"> </div>
+	    	</ul>
+			<a href="register.html" class="btn1 btn-1 btn1-1b">注册</a>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<div class="profile_banner">
+	<div class="container"> 
+	   <h3>登录</h3>
+	</div>
+</div>
+<div class='profiles'>
+  <div class="container">
+	  <div class="account_grid">
+			 <div class="col-md-6 login-left">
+			  	 <h3>Hello,有缘人!</h3>
+				 <p>通过创建帐户，加入我们的大家庭，您将不在孤单无聊，在我们这总会有在等待着您寻找的他（她），期待着与您美丽的邂逅和故事...</p>
+				 <a class="acount-btn" href="register.html">创建一个账户</a>
+			 </div>
+			 <div class="col-md-6 login-right">
+			  	<h3>注册客户</h3>
+				<p>如果您拥有我们的帐户，请登录。</p>
+				<form method="POST" action="">
+				  <div>
+					<span>用户名<label>*</label></span>
+					<input type="text" name="user_name"> 
+				  </div>
+				  <div>
+					<span>密码<label>*</label></span>
+					<input type="password" name="user_pwd" style="	border: 1px solid #EEE;
+					outline-color:#FF5B36;
+					width: 96%;
+					font-size: 1em;
+					padding: 0.5em;"> 
+				  </div>
+				  <a class="forgot" href="#">忘记密码?</a>
+				  <input type="submit" value="登录">
+			    </form>
+			 </div>
+			 <div class="clearfix"> </div>
+	   </div>
+  </div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div class="cssmenu">
+		  <ul>
+			<li class="active"><a href="#">Home</a></li> 
+			<li><a href="about.html">About</a></li>
+			<li><a href="profiles.html">Add Profile</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		  </ul>
+	    </div>
+	    <div class="copy">
+			<p>Copyright &copy; 2016.Company name All rights reserved.More Templates </p>
+		</div>
+		<div class="social"> 
+			<ul class="footer_social">
+			  <li><a href="#"> <i class="fb"> </i> </a></li>
+			  <li><a href="#"> <i class="tw"> </i> </a></li>
+		   </ul>
+		</div>
+	    <div class='clearfix'> </div>
+	</div>
+</div>
+</body>
+</html>		
