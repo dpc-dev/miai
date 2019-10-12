@@ -1,0 +1,245 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>perfect</title>
+<link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfont-->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<!--dropdown-->
+<script src="{{ url_for('static',filename ='js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ url_for('static',filename ='js/wow.min.js') }}"></script>
+<link href="{{ url_for('static',filename ='css/animate.css') }}" rel='stylesheet' type='text/css' />
+<script>
+	new WOW().init();
+</script>
+<script>
+	$(document).ready(function(){
+    $('#my-img').click(function(){
+        $('#img-upload').click();
+    });
+
+});
+</script>
+<script>
+	$(function(){
+		var can_submit = false
+		$("form").submit(function(){
+			if ($("#img-upload").val().length>0 & $('input[name="name"]').val().length>0 & $('input[name="date"]').val().length>0 & $('input[name="height"]').val().length>0 & $('input[name="weight"]').val().length>0 & $('input[name="work"]').val().length>0){
+				can_submit=true
+			}else{
+				alert("请完善个人信息")
+			}
+			return can_submit;
+		});
+		$('input[name="name"]').blur(function(){
+			if ($(this).val().length<=0){
+			$("#aa").css("color","red");
+			$("#aa").text("*真实姓名不能为空")
+			can_submit=false
+			}else{
+				console.log($(this).val().length)
+				console.log($(this).val())
+				$("#aa").css("color","green");
+				$("#aa").text("*")
+			}
+		});
+		$('input[name="date"]').blur(function(){
+			if ($(this).val().length<=0){
+			$("#ab").css("color","red");
+			$("#ab").text("*生日不能为空")
+			can_submit=false
+			}else{
+				$("#ab").css("color","green");
+				$("#ab").text("*")
+			}
+		});
+		$('input[name="height"]').blur(function(){
+			if ($(this).val().length<=0){
+			$("#ac").css("color","red");
+			$("#ac").text("*身高不能为空")
+			can_submit=false
+			}else{
+				$("#ac").css("color","green");
+				$("#ac").text("*")
+			}
+		})
+		$('input[name="weight"]').blur(function(){
+			if ($(this).val().length<=0){
+			$("#ad").css("color","red");
+			$("#ad").text("*体重不能为空")
+			can_submit=false
+			}else{
+				$("#ad").css("color","green");
+				$("#ad").text("*")
+			}
+		})
+		$('input[name="work"]').blur(function(){
+			if ($(this).val().length<=0){
+			$("#ae").css("color","red");
+			$("#ae").text("*职业不能为空")
+			can_submit=false
+			}else{
+				$("#ae").css("color","green");
+				$("#ae").text("*")
+			}
+		})
+	})
+</script>
+<script>
+	function xmTanUploadImg(obj) {
+		var file = obj.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function (e) {    //成功读取文件
+			var img = document.getElementById("my-img");
+			img.src = e.target.result;   //或 img.src = this.result / e.target == this
+		};
+	}
+</script>
+
+</head>
+<body>
+<div class="header wow fadeInUp" data-wow-delay="0.4s">
+	<div class='container'>
+		<div class="header_left">
+			<img src="{{ url_for('static',filename ='images/rate.png') }}" alt=""/>
+		</div>
+		<div class="logo">
+			<a href="/"><img src="{{ url_for('static',filename ='images/logo.png') }}" alt=""/>
+				<span>千寻</span>
+			</a>
+		</div>
+		<div class="header_right">
+			<ul class="header_user_info">
+			  <a class="login" href="/">
+				<li class="user_desc" style="font-size: 1.3em;"><span class="m_1">欢 迎，{{ name }} </span>！</li>
+				<i class="user"> </i> 
+				<div class="clearfix"> </div>
+			  </a>
+			  <div class="clearfix"> </div>
+	    	</ul>
+			<a href="log" class="btn1 btn-1 btn1-1b">注销</a>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<div class="profile_banner wow fadeInUpBig" data-wow-delay="0.4s">
+	<div class="container"> 
+		<h3>完善信息</h3>
+	</div>
+</div>
+<div class='profiles'>
+  <div class="container wow fadeInUp" data-wow-delay="0.4s">
+	   <div class="register">
+			  <form style="width: 60%;float: left;" method="POST" action=""  enctype="multipart/form-data"> 
+					
+				<table>
+						<div style="text-align: center" class="head-img1">
+								点击图片
+								<img src="{{ url_for('static',filename ='images/pic2.jpg') }}" style="width: 200px;" id="my-img">
+								
+								
+								<input accept="image/*" type="file" id="img-upload" style="display: none;" onchange="xmTanUploadImg(this)" name="file_img">
+								 
+						</div>
+						
+				 <div class="register-top-grid">
+					<!-- <h3>PERSONAL INFORMATION</h3> -->
+					
+					<tr><td>真实姓名</td><td><input type="text" name="name"><span id="aa"> *</span></td></tr>
+					<tr>
+						<td>性别</td>
+						<td>
+							<input type="radio" name="sex" checked value="G"/> 男
+							<input type="radio" name="sex" value="M"/> 女
+						</td>
+					</tr>
+					<tr><td>生日</td><td><input type="date" name="date"><span id="ab"> *</span></td></tr>
+					<tr><td>居住地</td><td><input type="text" name="local"><span id="ao" style="margin:0;font-weight: 500;		display: inline;
+						padding: .2em .6em .3em;
+						font-size: 60%;"> *选填</td></tr>
+					<tr>
+						<td>婚姻状态</td>
+						<td>
+							<input type="radio" name="wedding" value="未婚" checked/> 未婚
+							<input type="radio" name="wedding" value="离异"/> 离异
+							<input type="radio" name="wedding" value="丧偶"/> 丧偶
+						</td>
+					</tr>
+					<tr><td>身高</td><td><input type="text" name="height"><span id="ac"> *</span></td></tr>
+					<tr><td>体重</td><td><input type="text" name="weight"><span id="ad"> *</span></td></tr>
+					<tr>
+						<td>学历</td>
+						<td>
+							<input type="radio" name="edu" value="小学" checked/> 小学
+							<input type="radio" name="edu" value="初中"/> 初中
+							<input type="radio" name="edu" value="高中"/> 高中
+							<input type="radio" name="edu" value="专科"/> 专科
+							<input type="radio" name="edu" value="本科"/> 本科
+							<input type="radio" name="edu" value="其他"/> 其他
+						</td>
+					</tr>
+					<tr><td>职业</td><td><input type="text" name="work"><span id="ae"> *</span></td></tr>
+					<tr>
+						<td>爱好</td>
+						<td>
+							<input type="checkbox" name="hobby" checked value="体育与冒险"/> 体育与冒险
+							<input type="checkbox" name="hobby" value="电影与娱乐"/> 电影与娱乐
+							<input type="checkbox" name="hobby" value="艺术与科学"/> 艺术与科学
+							<input type="checkbox" name="hobby" value=" 技术与时尚"/> 技术与时尚
+						</td>
+					</tr>
+					<tr><td>个人介绍</td><td>
+						<textarea name="content" style="width: 300px;height: 100px;" placeholder="介绍一下自己吧~"></textarea>
+						<span id="af">  *选填</span></td></tr>
+					<tr><td><input type="submit" value="完成" class="submit_upd" style="background:#d26e8e;
+						color: #FFF;
+						font-size: 0.6em;
+						padding: 0.5em 2em;
+						transition: 0.5s all;
+						-webkit-transition: 0.5s all;
+						-moz-transition: 0.5s all;
+						-o-transition: 0.5s all;
+						display: inline-block;
+						text-transform: uppercase;
+						border:none;
+						outline:none;"></td></tr>
+					</div>
+					
+				</table>
+			</form>	
+			<div style="width: 40%;float: left;">
+					<img src="{{ url_for('static',filename ='images/user_upd.png') }}">
+			</div>
+		</div>
+  </div>
+</div>
+<div class="footer">
+	<div class="container wow fadeInUp" data-wow-delay="0.4s">
+		<div class="cssmenu">
+		  <ul>
+			<li class="active"><a href="#">Home</a></li> 
+			<li><a href="about.html">About</a></li>
+			<li><a href="profiles.html">Add Profile</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		  </ul>
+	    </div>
+	    <div class="copy wow fadeInUp" data-wow-delay="0.4s">
+			<p>Copyright &copy; 2019.Company name All rights reserved.More Templates </p>
+		</div>
+		<div class="social wow fadeInUp" data-wow-delay="0.4s"> 
+			<ul class="footer_social">
+			  <li><a href="#"> <i class="fb"> </i> </a></li>
+			  <li><a href="#"> <i class="tw"> </i> </a></li>
+		   </ul>
+		</div>
+	    <div class='clearfix'> </div>
+	</div>
+</div>
+</body>
+</html>		

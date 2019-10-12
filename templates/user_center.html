@@ -1,33 +1,38 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Single</title>
-<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<title>User_center</title>
+<link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
 
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href="{{ url_for('static',filename ='css/animate.css') }}" rel='stylesheet' type='text/css' />
 
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/lsb.css" rel="stylesheet" type="text/css">
-<link href="css/style2.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ url_for('static',filename ='css/touxiang.css') }}" rel='stylesheet' type='text/css' />
+<link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ url_for('static',filename ='css/lsb.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ url_for('static',filename ='css/style2.css') }}" rel="stylesheet" type="text/css" media="all" />
 <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700" rel="stylesheet">
 
-
-<script src="js/jquery-1.11.1.min.js"></script>
+<script src="{{ url_for('static',filename ='js/wow.min.js') }}"></script>
+<script src="{{ url_for('static',filename ='js/jquery-1.11.1.min.js') }}"></script>
+<script>
+		new WOW().init();
+	</script>
 </head>
 <body>
-<div class="header">
+<div class="header wow fadeInUp" data-wow-delay="0.4s" style="height: 104.6px;">
 	<div class='container'>
 		<div class="header_left">
-			<img src="images/rate.png" alt=""/>
+			<img src="{{ url_for('static',filename ='images/rate.png') }}" alt=""/>
 		</div>
 		<div class="logo">
-			<a href="index.html"><img src="images/logo.png" alt=""/>
+			<a href="index.html"><img src="{{ url_for('static',filename ='images/logo.png') }}" alt=""/>
 				<span>Soulmate</span>
 			</a>
 		</div>
@@ -44,30 +49,33 @@
 		</div>
 		<div class="clearfix"> </div>
 	</div>
+	<!-- <div class="touxiang" style="width: 80px;">
+		<img src="images/pic2.jpg" style="width: 80px;">
+	</div> -->
 </div>
-<div class="profile_banner">
+<div class="profile_banner wow fadeInUpBig" data-wow-delay="0.4s"">
 	<div class="cssmenu"> 
-	   <!-- <h3>Profile</h3> -->
 	   <ul>
 		<li><a href="index.html">家</a></li> 
 		<li><a href="about.html">关于</a></li>
 		<li><a href="profiles.html">Add Profile</a></li>
+		<li class="active"><a href="user_center.html">个人信息</a></li>
+		<li><a href="my_message_board.html">留言板</a></li>
 		<li><a href="contact.html">联系</a></li>
 	  </ul>
 	</div>
 </div>
 <div class="profile">
-	<div class="container">
+	<div class="container wow fadeInUp" data-wow-delay="0.4s">
 		<div class=" profile_left">
 			<div class="lsidebar span_1_of_profile">
 			  <div class="grid_4">
-			    <img src="images/pic1.jpg" class="img-responsive" alt=""/>
+			    <img src="{{ url_for('static',filename ='images/pic1.jpg') }}" class="img-responsive" alt=""/>
 				<ul class="category_desc1">
-				   <li class="cate_head">给  Ta  留言</li>
+				   <li class="cate_head">千 寻</li>
 				   <li class="cate_right">
 				   	 <ul class="list1">
 				   	    <li><a href="#"><i class="heart"> </i></a></li>
-				   	    <!-- <li><a href="#"><i class="heart"> </i></a></li>  	    -->
 				   	 </ul>
 				   </li>
 				   <div class="clearfix"> </div>
@@ -78,12 +86,14 @@
 				<h4><a href="#">何为情话 ,</a>Manager-usa</h4>	
 				<table class="profile-fields">
 					<tbody>
+						<tr><th>姓名</th><td>man</td></tr>
 						<tr><th>性别</th><td>man</td></tr>
-						<tr><th>年龄</th><td>25</td></tr>			
-						<tr><th>国家</th><td>Usa</td></tr>
-						<tr><th>城市</th><td>Newyork</td></tr>
-						<tr><th>所在地</th><td>Newyork</td></tr>
+						<tr><th>生日</th><td>25</td></tr>			
+						<tr><th>居住地</th><td>Newyork</td></tr>
 						<tr><th>婚姻状态</th><td>Newyork</td></tr>
+						<tr><th>身高</th><td>man</td></tr>
+						<tr><th>体重</th><td>man</td></tr>
+						<tr><th>学历</th><td>man</td></tr>
 						<tr><th>职业</th><td>Newyork</td></tr>
 						<tr><th>爱好</th><td>Newyork</td></tr>
 					</tbody>
@@ -98,19 +108,19 @@
 </div>
 
 <div class="w3l_inner_section">
-	<div class="container">
+	<div class="container wow fadeInUp" data-wow-delay="0.4s">
 		<div class="wthree_title_agile">
 			<h2>my  <span>photos</span></h2>
 			<p><i class="fa fa-heart-o" aria-hidden="true"></i></p>		
 		</div>
-		<p class="sub_para">WE ARE GETTING MARRIED</p>
+		<p class="sub_para">WISH YOU WERE HERE</p>
 		<div class="inner_w3l_agile_grids">
 		<div class="col-md-4 w3_tabs_grid">
 
 		<div class="grid">
-			<a href="images/g1.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g1.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g1.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g1.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -124,9 +134,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid">
 		<div class="grid">
-			<a href="images/g2.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g2.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -140,9 +150,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid">
 		<div class="grid">
-			<a href="images/g3.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g3.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g3.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g3.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -156,9 +166,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid w3_tabs_grid_sub">
 		<div class="grid">
-			<a href="images/g4.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g4.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g4.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g4.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -172,9 +182,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid w3_tabs_grid_sub">
 		<div class="grid">
-			<a href="images/g5.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g5.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g5.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g5.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -188,9 +198,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid w3_tabs_grid_sub">
 		<div class="grid">
-			<a href="images/g6.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g6.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g6.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g6.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -204,9 +214,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid">
 		<div class="grid">
-			<a href="images/g7.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g7.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g7.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g7.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -220,9 +230,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid">
 		<div class="grid">
-			<a href="images/g8.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g8.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g8.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g8.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -236,9 +246,9 @@
 	</div>
 	<div class="col-md-4 w3_tabs_grid">
 		<div class="grid">
-			<a href="images/g9.jpg" class="lsb-preview" data-lsb-group="header">
+			<a href="{{ url_for('static',filename ='images/g9.jpg') }}" class="lsb-preview" data-lsb-group="header">
 				<figure class="effect-winston">
-					<img src="images/g9.jpg" class="img-responsive" alt=" " />
+					<img src="{{ url_for('static',filename ='images/g9.jpg') }}" class="img-responsive" alt=" " />
 					<figcaption>
 						<p>
 							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -265,7 +275,7 @@ $(window).load(function() {
 
 <div class="footer">
 	<div class="container">
-		<div class="cssmenu">
+		<div class="cssmenu wow fadeInUp" data-wow-delay="0.4s">
 		  <ul>
 			<li class="active"><a href="#">Home</a></li> 
 			<li><a href="about.html">About</a></li>
@@ -273,10 +283,10 @@ $(window).load(function() {
 			<li><a href="contact.html">Contact</a></li>
 		  </ul>
 	    </div>
-	    <div class="copy">
+	    <div class="copy wow fadeInUp" data-wow-delay="0.4s">
 			<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
 		</div>
-		<div class="social"> 
+		<div class="social wow fadeInUp" data-wow-delay="0.4s"> 
 			<ul class="footer_social">
 			  <li><a href="#"> <i class="fb"> </i> </a></li>
 			  <li><a href="#"> <i class="tw"> </i> </a></li>

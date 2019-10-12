@@ -25,12 +25,15 @@ import st,re
 # code=random.randint(10000,100000)
 # req = ct.send('18671289536', '尊敬的用户您好,欢迎加入千寻大家庭，您本次的验证码为%s,有效时间为5分钟'%code)
 # print(req)
-with open(r"C:\Users\Administrator\Desktop\Web技术\代码\dpcapi - 副本\static\images\g5.jpg") as f:
-    data = f.read()
-db = pymysql.connect("localhost","root","1478963520.ai","qxun",charset='utf8',use_unicode=True,)
-cur = db.cursor()
+# with open(r"C:\Users\Administrator\Desktop\Web技术\代码\dpcapi - 副本\static\images\g5.jpg") as f:
+#     data = f.read()
+# db = pymysql.connect("localhost","root","1478963520.ai","qxun",charset='utf8',use_unicode=True,)
+# cur = db.cursor()
 
-cur.execute("insert into user_pic values(1001,1,%s)"%data)
-db.commit()
-cur.close()
-db.close()
+# cur.execute("insert into user_pic values(1001,1,%s)"%data)
+# db.commit()
+# cur.close()
+# db.close()
+# 
+for i in range(9,-1,-1):
+    print(i)

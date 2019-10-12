@@ -1,4 +1,5 @@
 -- 创建表存储用户信息,uid(用户ID，主键),uanme(用户名,唯一),pwd(用户密码,加盐),phone(手机号),error(账号状态,0正常，1注销,2异常),status(0管理员，1普通用户)
+-- judge,判断用户是否已经完善信息，0表示否，1表示是,默认为零
 drop table user_web;
 create table user_web (
     uid1 int unsigned auto_increment,
@@ -6,7 +7,8 @@ create table user_web (
     pwd char(32) not null,
     phone char(11) not null,
     email char(32),
-    error enum("0","1","2") not null, 
+    error enum("0","1","2") not null,
+    judge enum("0","1") not null,
     primary key(uid1)
 )engine=InnoDB auto_increment=1001 default charset=utf8;
 -- 用户详细信息表
@@ -29,14 +31,15 @@ create table user_if (
     uid2 int unsigned not null,
     head_p varchar(300) not null,
     true_name char(20) not null,
-    sex enum("G","M") not null unique,
-    age char(3) not null,
-    height char(3) not null,
-    weight1 char(3) not null,
-    nation varchar(150) not null,
-    haddress varchar(150) not null,
+    sex enum("G","M") not null ,
+    age char(30) not null,
+    height char(10) not null,
+    weight1 char(10) not null,
+    education char(10),
+    -- nation varchar(150) not null,
+    -- haddress varchar(150) not null,
     location1 varchar(150),
-    huny enum("1","2","3") not null,
+    huny enum("未婚","离异","丧偶") not null,
     job varchar(150),
     hobby varchar(150),
     about varchar(320),
@@ -57,12 +60,14 @@ create table user_pic (
 -- mg_id(留言id,从0开始)
 -- mg_user_id(留言用户id，外键约束)
 -- mg_text(留言内容)
+--pub_time(留言时间)
 -- error（留言状态，0,正常，1删除）
 create table user_meg (
     uid4 int unsigned not null,
     mg_id int not null,
     mg_user_id int unsigned not null,
     mg_text varchar(320) not null,
+    pud_time datetime not null,
     error enum("0","1"),
     foreign key(uid4) references user_web(uid1),
     foreign key(mg_user_id) references user_web(uid1)

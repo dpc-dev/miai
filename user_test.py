@@ -3,7 +3,7 @@ def test_name(user_name):
     '''
     user_name:校验用户名是否合法
     '''
-    if re.match("^\S{2,8}$",user_name):
+    if re.match("^\S{2,10}$",user_name):
         a = True
     else:
         a = False

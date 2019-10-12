@@ -1,0 +1,36 @@
+.container{
+    width: 100%;
+}
+
+.profile_left_mb{
+    float: left;
+    border: 1px;
+    padding: 100px red;
+
+    width: 66.7%;
+    margin-top: 2em;
+    border-bottom: 1px dotted black;
+}
+
+.head_photo {
+    float: left;
+    border: 1px;
+    width: 20%;
+}
+.mb_line{
+    margin-left: 1em;
+    float: left;
+    border: 1px;
+    width: 70%;
+}
+.mb_form{
+    position: absolute;
+    top: 220px;
+    right: 20px;
+    left: 70%;
+}
+.mb_footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}

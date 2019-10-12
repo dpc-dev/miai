@@ -32,12 +32,12 @@
 				can_submit = false;
 				return;
 			};
-			if (uname.length <2 || uname.length >8){
+			if (uname.length <2 || uname.length >10){
 				//用户名不为空
 				
 				$("#aa").css("color","red");
 				can_submit = false;
-				$("#aa").text("*用户名最少由2位，最多8位的非空字符串符合或数字组成");
+				$("#aa").text("*用户名最少由2位，最多8位的字符串组成");
 				return;
 
 			};

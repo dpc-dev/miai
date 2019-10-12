@@ -38,6 +38,46 @@
 <script>
 	new WOW().init();
 </script>
+<script>
+	$(function(){
+		$("form").submit(function(){
+			var search1 = $("#search").val()
+			
+			
+			$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=UTF-8",
+				dataType: "json",
+				url: "/search",
+				data: "search="+search1,
+				timeout:1000,
+				success: function(data){
+					
+					if (data[0].error==0){
+						$("#hg").remove()
+						for (var j=0;j<6;j++){
+						$("#abb").remove()
+					};
+					for (var i=1;i<data.length;i++){
+						$("#ddd").append("<div class='col-md-4 wow fadeInRight' data-wow-delay='0.4s' id='abb'>"+"<div class='grid_4'><a href='single.html?"+data[i].url_u+"'>"+"<h4><span class='m_3'>"+data[i].ture_name+","+data[i].job+","+data[i].location+"</span>security-usa</h4>"+" <img src='/static/"+data[i].head_p+"' class='img-responsive' style='width: 360px;height: 254px;' alt=''/>"+"<ul class='category_desc'>"+" <li class='cate_head'>爱好："+data[i].hobby+"</li>"+"<li class='cate_right'>"+"<ul class='list1'>"+"<li><i class='heart'> </i></li>"+"<li><i class='heart'> </i></li>"+"<li><i class='heart'> </i></li>"+" </ul>"+"</li>"+"<div class='clearfix'> </div>"+"</ul>"+"<h5>完整档案</h5>"+"</a></div>"+"</div>")
+					}	
+					var t = $('#ddd').offset().top;  //#test是需要跳转的div id位置
+					$(window).scrollTop(t);
+				}else{
+					$("#ddd").html("<p style='font-family:cursive;text-shadow:6px 2px 2px #333;color:deeppink;font-size:4em;' id='hg'>⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄ 什 么 也 没 有 哦 ~</p>")
+					
+					var t = $('#ddd').offset().top;  //#test是需要跳转的div id位置
+					$(window).scrollTop(t);
+				}
+				}
+
+			})
+			return false;
+		});
+					
+				});
+		
+</script>
 </head>
 <body>
 <div class="header wow fadeInUp" data-wow-delay="0.4s">
@@ -75,7 +115,7 @@
 	</div>
 </div>
 <div class="banner wow bounceInRight" data-wow-delay="0.4s">
-	<div class="container"> 
+	<div class="container" id="aaaa"> 
 	   <div class="banner_right">
 		   <h2>Find a perfect date</h2>
 		   <h1>分享您的完美时刻 </h1>
@@ -87,74 +127,20 @@
 	</div>
 </div>
 
-<div class="copyrights">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
+<div class="copyrights">Collect from </div>
 <div class="content_bottom">
 	<div class="container">
-	  <div class="box1">
-		<div class="col-md-4 wow fadeInLeft" data-wow-delay="0.4s">
-		  <div class="grid_4"><a href="single.html">
-			<h4><span class="m_3">Leonardo , </span> Manager-usa</h4>
-			<img src="{{ url_for('static',filename ='images/pic1.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
-			<ul class="category_desc">
-			   <li class="cate_head">Based in 1.100 votes</li>
-			   <li class="cate_right">
-			   	 <ul class="list1">
-			   	    <li><i class="heart"> </i></li>
-			   	    <li><i class="heart"> </i></li>
-			   	    <li><i class="heart"> </i></li>
-			   	    <li><i class="heart"> </i></li>
-			   	 </ul>
-			   </li>
-			   <div class="clearfix"> </div>
-			</ul>
-			<h5>完整档案</h5>
-		</a> </div>
-		</div>
-		<div class="col-md-4 wow fadeInUp" data-wow-delay="0.4s">
-		   <div class="grid_4"><a href="single.html">
-			<h4><span class="m_3">luke ,</span>engineer-usa</h4>
-			<img src="{{ url_for('static',filename ='images/pic2.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
-			<ul class="category_desc">
-			   <li class="cate_head">Based in 956 votes</li>
-			   <li class="cate_right">
-			   	 <ul class="list1">
-			   	   <li><i class="heart"> </i></li>
-			   	   <li><i class="heart"> </i></li>
-			   	   <li><i class="heart"> </i></li>
-			   	 </ul>
-			   </li>
-			   <div class="clearfix"> </div>
-			</ul>
-			<h5>完整档案</h5>
-		  </a></div>
-	    </div>
-		<div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
-		  <div class="grid_4"><a href="single.html">
-			<h4><span class="m_3">max ,</span>security-usa</h4>
-			<img src="{{ url_for('static',filename ='images/pic3.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
-			<ul class="category_desc">
-			   <li class="cate_head">Based in 900 votes</li>
-			   <li class="cate_right">
-			   	 <ul class="list1">
-			   	    <li><i class="heart"> </i></li>
-			   	    <li><i class="heart"> </i></li>
-			   	    <li><i class="heart"> </i></li>
-			   	 </ul>
-			   </li>
-			   <div class="clearfix"> </div>
-			</ul>
-			<h5>完整档案</h5>
-		  </a></div>
-		</div>
+	  <div class="box1" id="acc">
+		<div id="ddd">
+		{% for i in information %}
 
-
-		<div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
-			<div class="grid_4"><a href="single.html?{{other}}">
-			  <h4><span class="m_3">{{ ture_name }},{{ job }},{{ location }}</span>security-usa</h4>
+		<div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s" id="abb">
+			<div class="grid_4"><a href="single.html?{{i['url_u']}}">
+			  <h4><span class="m_3">{{ i['ture_name'] }},{{ i['job'] }},{{ i.location }}</span>security-usa</h4>
 			  
-			  <img src="{{url_for('static',filename =head_p)}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
+			  <img src="{{url_for('static',filename =i.head_p)}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
 			  <ul class="category_desc">
-				 <li class="cate_head">爱好：{{ hobby }}</li>
+				 <li class="cate_head">爱好：{{ i.hobby }}</li>
 				 <li class="cate_right">
 					  <ul class="list1">
 						 <li><i class="heart"> </i></li>
@@ -167,46 +153,8 @@
 			  <h5>完整档案</h5>
 			</a></div>
 		  </div>
-
-		  <div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
-			<div class="grid_4"><a href="single.html">
-			  <h4><span class="m_3">max ,</span>security-usa</h4>
-			  <img src="{{ url_for('static',filename ='images/pic3.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
-			  <ul class="category_desc">
-				 <li class="cate_head">Based in 900 votes</li>
-				 <li class="cate_right">
-					  <ul class="list1">
-						 <li><i class="heart"> </i></li>
-						 <li><i class="heart"> </i></li>
-						 <li><i class="heart"> </i></li>
-					  </ul>
-				 </li>
-				 <div class="clearfix"> </div>
-			  </ul>
-			  <h5>完整档案</h5>
-			</a></div>
-		  </div>
-		
-		<div class="col-md-4 wow fadeInRight" data-wow-delay="0.4s">
-			<div class="grid_4"><a href="single.html">
-			  <h4><span class="m_3">max ,</span>security-usa</h4>
-			  <img src="{{ url_for('static',filename ='images/pic3.jpg')}}" class="img-responsive" style="width: 360px;height: 254px;" alt=""/>
-			  <ul class="category_desc">
-				 <li class="cate_head">Based in 900 votes</li>
-				 <li class="cate_right">
-					  <ul class="list1">
-						 <li><i class="heart"> </i></li>
-						 <li><i class="heart"> </i></li>
-						 <li><i class="heart"> </i></li>
-					  </ul>
-				 </li>
-				 <div class="clearfix"> </div>
-			  </ul>
-			  <h5>完整档案</h5>
-			</a></div>
-		  </div>
-		<div class="clearfix"> </div>
-	  </div>
+		  {% endfor %}
+		</div>
 	  
 	  <div class='span1'>
 		  <select class="dropdown" tabindex="10" data-settings='{"wrapperClass":"metro1"}'>
@@ -227,9 +175,9 @@
 		 <span>
 		   <div class="search-box">
 		   	<i class="search-icon"> </i>
-		    <input type="text" value="Type something here..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type something here...';}">
+		    <input type="text" value="请输入关键字..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入关键字...';}" id="search">
 		   </div>
-		   <input name="submit" type="submit" id="submit" value="Search">
+		   <input name="submit" type="submit" id="submit" value="寻找">
 		 </span>	
 		<div class="clearfix"> </div>
 	    </form>
