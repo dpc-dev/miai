@@ -12,6 +12,7 @@ def home():
     information = []
     name = session.get("uname")
     pwd = session.get("upwd")
+    uid = session.get("uid")
     if name:
         hashlib_pwd = hashlib.md5(pwd.encode())
         cur.execute("select judge,uid1 from user_web where uname='%s' and pwd='%s'"%(name,hashlib_pwd.hexdigest()))
@@ -23,6 +24,7 @@ def home():
         if request.method == "GET":
             req={}
             req['name'] = name
+            req['uid'] = uid
         #用户登录后的推荐，优先级推荐喜好，地点
             cur.execute("select max(uid1) from user_web ")
             querying4 = cur.fetchone()
@@ -187,6 +189,7 @@ def home():
         return render_template("index.html",information=information)
 @app.route("/search")
 def search():
+
     baif = "%"
     dpc = []
     cont = 0
@@ -332,7 +335,7 @@ def perfect():
     pwd = session.get("upwd")
     # other_user = request.GET.get("name")
     # print("我是个性用户",other_user)
-    if not name:
+    if not pwd:
         return redirect(url_for("login"))
     hashlib_pwd = hashlib.md5(pwd.encode())
     cur.execute("select uname,pwd from user_web where uname='%s' and pwd='%s'"%(name,hashlib_pwd.hexdigest()))
@@ -392,7 +395,7 @@ def single():
     name = session.get("uname")
     pwd = session.get("upwd")
     other_user_id = request.args.get("id")
-    
+    uid = session.get("uid")
     
     if name or pwd:
         hashlib_pwd = hashlib.md5(pwd.encode())
@@ -404,6 +407,7 @@ def single():
             cur.execute("select uname from user_web where uid1='%s' "%(other_user_id))
             querying12 = cur.fetchone()
             ree = {}
+            ree["uid"] = uid
             print("hhhhhhhhhhhhhhhhhh",other_user_id)
             ree["other_id"] = "id=%s"%other_user_id
             print("kkkkkkkkkkkkkkk",ree["other_id"])
@@ -414,6 +418,7 @@ def single():
                 ree["sex"] = "男"
             else:
                 ree["sex"] = "女"
+            ree["name"] = name
             ree["age"] = querying11[4]
             ree["height"] = querying11[5]
             ree["weight"] = querying11[6]
@@ -423,7 +428,10 @@ def single():
             ree["job"] = querying11[10]
             ree["hobby"] = querying11[11]
             ree["about"] = querying11[12]
-            return render_template("single.html",name=name,**ree)
+            cur.execute("select p_if from user_pic where uid3=%s "%(other_user_id))
+            query = cur.fetchall()
+            print(query)
+            return render_template("single.html",query=query,**ree)
         else:
             return redirect(url_for("login"))
     else:
@@ -431,6 +439,7 @@ def single():
 #校验用户名接口API
 @app.route("/check_uname")
 def login1():
+    
     uname = request.args.get("uname")
     rsq = {}
     #连接数据库查询,校验用户名是否存在
@@ -471,14 +480,41 @@ def other_message_board():
     req={}
     cur = db.cursor()
     res=[]
+    dpc=[]
+    name = session.get("uname")
     if request.method == "GET":
         other_id = request.args.get("id")
+        aspx = request.args.get("aspx")
+        aspx = int(aspx)
+        print("shenne",aspx)
         session["other_id"] = other_id
-        print("aaaaaaaaaa",other_id)
         cur.execute("select mg_user_id,mg_text,pub_time from user_meg where uid4=%s "%other_id)
         ress = cur.fetchall()
+        mg_cont = len(ress)
+        print("llllll",mg_cont)
+        if mg_cont%3==0:
+            f_cont = mg_cont//3
+        else:
+            f_cont = (mg_cont//3)+1
+        for i in range(f_cont):
+            dpc.append(i+1)
+        req["other_uid"] = other_id
+        req["f_cont"]= f_cont
+        req["d_cont"] = aspx
+        req["dpc"] = dpc
+        uid = session.get("uid")
+        req["uid"] = uid
+        stat = (aspx-1)*3
+        req["name"] = name
+        end = aspx*3
+        
+        if end>mg_cont:
+            end_ou = mg_cont-(end - (end-mg_cont))-1
+        else:
+            end_ou = mg_cont-1-end
+        
         if ress:
-            for i in range(len(ress)-1,-1,-1):
+            for i in range(len(ress)-1-stat,end_ou,-1):
                 cur.execute("select uname from user_web where uid1=%s "%ress[i][0])
                 ress1 = cur.fetchone()
                 mg_name = ress1[0]
@@ -488,41 +524,108 @@ def other_message_board():
                 res.append((mg_name,ress[i][1],ress[i][2],head_p,"id=%s"%ress[i][0]))
 
         return render_template("other_message_board.html", messages=res,**req)
-    elif request.method == "POST":
-        content = request.form.get("content")
-        if content:
-            if 0 < len(content) <= 320:
-                # 将留言保存到数据库
-                other_id = int(session.get("other_id"))
-                my_uid = session.get("uid")
-                mg_id = 1001
-                pub_time = datetime.datetime.now()
-                cur = db.cursor()
-                print("ssssssssssssssss",content)
-                cur.execute("insert into user_meg values (%s,%s,%s,'%s','%s','0')"%(other_id,mg_id,my_uid,content,pub_time))
-                db.commit()
-                # session.pop("other_id")
-                return redirect("other_message_board?id=%s"%other_id)
-
-        abort(Response("留言失败！"))
-
-
-#用户中心
-@app.route("/user_center")
-def user_center():
+        
+        
+@app.route("/mg_search")
+def mg_search():
+    res = []
+    cur = db.cursor()
+    res.append({"error":0})
     name = session.get("uname")
     pwd = session.get("upwd")
-    # other_user = request.GET.get("name")
-    # print("我是个性用户",other_user)
-    if name or pwd:
+    if pwd:
+        hashlib_pwd = hashlib.md5(pwd.encode())
+        cur.execute("select uname,pwd from user_web where uname='%s' and pwd='%s'"%(name,hashlib_pwd.hexdigest()))
+        querying2 = cur.fetchone()
+        if not querying2:
+            return redirect(url_for("login"))
+        else:
+            content = request.args.get("mg")
+            if content:
+                if 0 < len(content) <= 320:
+                    # 将留言保存到数据库
+                    other_id = int(session.get("other_id"))
+                    my_uid = session.get("uid")
+                    mg_id = 1001
+                    pub_time = datetime.datetime.now()
+                    cur = db.cursor()
+                    print("ssssssssssssssss",content)
+                    cur.execute("insert into user_meg values (%s,%s,%s,'%s','%s','0')"%(other_id,mg_id,my_uid,content,pub_time))
+                    db.commit()
+
+                    cur.execute("select mg_user_id,mg_text,pub_time from user_meg where uid4=%s "%other_id)
+                    ress = cur.fetchall()
+                    if len(ress)>3:
+                        ccc = len(ress)-1-3
+                    else:
+                        ccc = -1
+                    if ress:
+                        for i in range(len(ress)-1,ccc,-1):
+                            cur.execute("select uname from user_web where uid1=%s "%ress[i][0])
+                            ress1 = cur.fetchone()
+                            mg_name = ress1[0]
+                            cur.execute("select head_p from user_if where uid2=%s "%ress[i][0])
+                            ress3 = cur.fetchone()
+                            head_p = ress3[0]
+                            res.append({"ma_name":mg_name,"mg_text":ress[i][1],"pub_time":ress[i][2],"head_p":head_p,"uid":"id=%s"%ress[i][0]})
+                        
+                        return jsonify(res)
+                else:
+                    res[0]["error"] = 1
+                    return jsonify(res)
+
+
+#用户相册
+@app.route("/my_photos",methods=["POST","GET"])
+def my_photos():
+    name = session.get("uname")
+    pwd = session.get("upwd")
+    uid = session.get("uid")
+    if name and pwd:
         hashlib_pwd = hashlib.md5(pwd.encode())
         cur.execute("select uname,pwd from user_web where uname='%s' and pwd='%s'"%(name,hashlib_pwd.hexdigest()))
         querying2 = cur.fetchone()
         if querying2:
-            return render_template("user_center.html",name=name)
+            res={}
+            
+            if request.method == "GET":
+                res['name'] = name
+                pid = request.args.get("id")
+                if pid:
+                    pass
+                else:
+                    cur.execute("select p_if from user_pic where uid3=%s"%(uid))
+                    querying3 = cur.fetchall()
+                res["uid"] = uid
+                print(querying3)
+                return  render_template("my_photos.html",photo_list=querying3,**res)
+            if request.method == "POST":
+                uploaded_file = request.files["photo"]
+                file_name = uploaded_file.filename
+                file_n,file_text = os.path.splitext(file_name)
+                file_name = file_n + "_"+name +file_text
+                file_path = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__),"static"),"images"),file_name)
+                
+                uploaded_file.save(file_path)
+                file_name_m = "images" + "/" + file_name
+                a = 1
+                cur.execute("insert into user_pic  values ('%s','%s','%s')"%(uid,a,file_name_m))
+                db.commit()
+                return  redirect(url_for("my_photos"))
         else:
-            return redirect(url_for("login"))
+            return  redirect(url_for("login"))
     else:
-        return redirect(url_for("login"))
+        return  redirect(url_for("login"))
+
+@app.route("/about")
+def about():
+    res ={}
+    name = session.get("uname")
+    pwd = session.get("upwd")
+    uid = session.get("uid")
+    res["name"] = name
+    res["pwd"] =pwd
+    res["uid"] =uid
+    return render_template("about.html",**res)
 if __name__ == "__main__":
-    app.run(port=80,debug=True)
+    app.run(host="0.0.0.0",port=80,debug=True)

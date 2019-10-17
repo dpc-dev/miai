@@ -1,0 +1,17 @@
+#up2{
+    opacity: 50;
+    /* width: 89.2px;
+    height: 39.2px; */
+    margin-left: 1px;
+    
+}
+
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    width: 170px;
+    height: 64.4px;;
+}

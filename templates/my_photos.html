@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Myphotos</title>
+<link href="{{url_for('static',filename ='css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
+<link href="{{url_for('static',filename ='css/photo.css')}}" rel='stylesheet' type='text/css'>
+<link href="{{url_for('static',filename ='css/style.css')}}" rel='stylesheet' type='text/css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href="{{url_for('static',filename ='css/lsb.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url_for('static',filename ='css/style2.css')}}" rel="stylesheet" type="text/css" media="all" />
+
+<link href="{{url_for('static',filename ='css/touxiang.css')}}" rel='stylesheet' type='text/css' />
+<script src="{{url_for('static',filename ='js/jquery-1.11.1.min.js')}}"></script>
+<script src="{{url_for('static',filename ='js/jquery.easydropdown.js')}}"></script>
+
+<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700" rel="stylesheet">
+
+
+<link href="{{url_for('static',filename ='css/flexslider.css')}}" rel='stylesheet' type='text/css' />
+<script defer src="{{url_for('static',filename ='js/jquery.flexslider.js')}}"></script>
+<script type="text/javascript">
+$(function(){
+	SyntaxHighlighter.all();
+});
+$(window).load(function(){
+	$('.flexslider').flexslider({
+	animation: "slide",
+	start: function(slider){
+		$('body').removeClass('loading');
+	}
+	});
+});
+</script>
+
+<script>
+		$(document).ready(function(){
+		$('#my-img').click(function(){
+			$('#img-upload').click();
+		});
+	
+	});
+</script>
+
+<script src="{{url_for('static',filename ='js/wow.min.js')}}"></script>
+<link href="{{url_for('static',filename ='css/animate.css')}}" rel='stylesheet' type='text/css' />
+<script>
+	new WOW().init();
+</script>
+</head>
+<body>
+<div class="header wow fadeInUp" data-wow-delay="0.4s">
+	<div class='container'>
+		<div class="header_left">
+			<img src="{{url_for('static',filename ='images/rate.png')}}" alt=""/>
+		</div>
+		<div class="logo">
+			<a href="/"><img src="{{url_for('static',filename ='images/logo.png')}}" alt=""/>
+				<span>千寻</span>
+			</a>
+		</div>
+		<div class="header_right">
+			<ul class="header_user_info">
+					{% if name %}
+					<a class="login" href="/single.html?id={{uid}}">
+					<li class="user_desc"><span class="m_1">欢 迎，{{ name }}!</span></li>
+					<div class="clearfix"> </div>
+					</a>
+					<div class="clearfix"> </div>
+				</ul>
+				<a href="log" class="btn1 btn-1 btn1-1b">注销</a>
+					{% else %}
+			  <a class="login" href="login">
+				<li class="user_desc"><span class="m_1">已有账户 ? </span>登陆</li>
+				<i class="user"> </i> 
+				<div class="clearfix"> </div>
+			  </a>
+			  <div class="clearfix"> </div>
+	    	</ul>
+			<a href="register.html" class="btn1 btn-1 btn1-1b">注册</a>
+		</div>
+		{% endif %}
+		<div class="clearfix"> </div>
+	</div>
+	
+</div>
+<div class="profile_banner wow fadeInUpBig" data-wow-delay="0.4s"">
+		<div class="cssmenu"> 
+		   <ul>
+			<li><a href="/">家</a></li> 
+			<li><a href="/about">关于</a></li>
+			<li><a href="/single.html?id={{uid}}">个人信息</a></li>
+			<li><a href="/other_message_board?id={{uid}}&aspx=1">留言板</a></li>
+			<li><a href="/my_photos">照片墙</a></li>
+		  </ul>
+		</div>
+	</div>
+<div class="banner wow bounceInRight" data-wow-delay="0.4s">
+	<div class="container"> 
+	   <div class="banner_right">
+		   <h2>Show Yourself</h2>
+		   <h1>分享您的完美时刻 </h1>
+		   <form method="POST" action="" enctype="multipart/form-data">
+				<ul class="button">
+					<li><a class="btn1 btn2 btn-1 btn1-1b file">选择照片<input type="file" multiple="multiple" name="photo"></a></li>
+					<li><a class="btn1 btn2 btn-1 btn1-1b file">上传照片<input type="submit" value="上传"></a></li>
+				</ul>
+			</form>
+	   </div>
+	</div>
+</div>
+
+<div class="w3l_inner_section">
+	<div class="container">
+		   <div class="wthree_title_agile">
+				<h2>my  <span>photo</span></h2>
+				<p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+				
+			</div>
+		 <p class="sub_para">WE ARE GETTING MARRIED</p>
+
+		
+		 <div class="inner_w3l_agile_grids">
+				
+					
+					{% if photo_list %}
+					{% for i in photo_list %}
+					<div class="col-md-4 w3_tabs_grid">
+						<div class="grid">
+							<a href="{{url_for('static',filename =i[0])}}" class="lsb-preview" data-lsb-group="header">
+								<figure class="effect-winston">
+									<img src="{{url_for('static',filename =i[0])}}" class="img-responsive" alt=" " style="width: 500px;height: 250px;"/>
+									<figcaption>
+										<p>
+											<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+											<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+											<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+										</p>
+									</figcaption>			
+								</figure>
+							</a>
+						</div>
+					</div>
+			
+						
+				{% endfor %}
+				{% else %}
+				<h2>这里什么都没有呢，上传照片展示下自己吧~<h2></h2>
+				{% endif %}
+			</div>
+	
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+
+
+<div class="copyrights">Collect from</div>
+<div class="content_bottom">
+	<div class="container">
+	  <div class="box1">
+		
+		  
+	  <div class='clearfix'> </div>
+	  <div class="search wow bounceInUp" data-wow-delay="0.4s">
+   	    
+	   <h4>Disclaimer</h4>
+	   <p class="m_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+       <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum. </p>
+      </div>
+   </div>
+</div>
+</div>
+
+<script type="text/javascript" src="{{url_for('static',filename ='js/jquery-2.1.4.min.js')}}"></script>
+ <script src="{{url_for('static',filename ='js/lsb.min.js')}}"></script>
+<script>
+$(window).load(function() {
+		$.fn.lightspeedBox();
+	});
+</script>
+
+<div class="footer">
+	<div class="container">
+		<div class="cssmenu wow fadeInLeft" data-wow-delay="0.4s">
+		  <ul>
+			<li class="active"><a href="#">Home</a></li> 
+			<li><a href="about.html">About</a></li>
+			<li><a href="profiles.html">Add Profile</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		  </ul>
+	    </div>
+	    <div class="copy wow fadeInUp" data-wow-delay="0.4s">
+			<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from </p>
+		</div>
+		<div class="social wow fadeInRight" data-wow-delay="0.4s"> 
+			<ul class="footer_social">
+			  <li><a href="#"> <i class="fb"> </i> </a></li>
+			  <li><a href="#"> <i class="tw"> </i> </a></li>
+		   </ul>
+		</div>
+	    <div class='clearfix'> </div>
+	</div>
+</div>
+</body>
+</html>		

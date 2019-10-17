@@ -35,5 +35,5 @@ import st,re
 # cur.close()
 # db.close()
 # 
-for i in range(9,-1,-1):
+for i in range(0,-1,-1):
     print(i)

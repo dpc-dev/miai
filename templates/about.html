@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>About</title>
+
+<link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+
+<link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+<script src="{{ url_for('static',filename ='js/jquery-1.11.1.min.js') }}"></script>
+
+<script src="{{ url_for('static',filename ='js/wow.min.js') }}"></script>
+<link href="{{ url_for('static',filename ='css/animate.css') }}" rel='stylesheet' type='text/css' />
+<script>
+	new WOW().init();
+</script>
+</head>
+<body>
+<div class="header wow fadeInUp" data-wow-delay="0.4s">
+	<div class='container'>
+		<div class="header_left">
+			<img src="{{ url_for('static',filename ='images/rate.png') }}" alt=""/>
+		</div>
+		<div class="logo">
+			<a href="index.html"><img src="{{ url_for('static',filename ='images/logo.png') }}" alt=""/>
+				<span>千寻</span>
+			</a>
+		</div>
+		<div class="header_right">
+			<ul class="header_user_info">
+			  <a class="login" href="login">
+				<li class="user_desc"><span class="m_1">已有账户 ? </span>登陆</li>
+				<i class="user"> </i> 
+				<div class="clearfix"> </div>
+			  </a>
+			  <div class="clearfix"> </div>
+	    	</ul>
+			<a href="register.html" class="btn1 btn-1 btn1-1b">注册</a>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<div class="profile_banner wow fadeInUpBig" data-wow-delay="0.4s">
+	<div class="cssmenu"> 
+	   <ul>
+		<li><a href="/">首页</a></li> 
+		<li ><a href="/about">关于</a></li>
+		<li><a href="/single.html?id={{uid}}">个人信息</a></li>
+		<li><a href="/other_message_board?id={{uid}}&aspx=1">留言板</a></li>
+		<li><a href="/my_photos">照片墙</a></li>
+	  </ul>
+	</div>
+</div>
+<div class="profile">
+	<div class="container">
+	  <div class="about_box1">
+	  	<h1 class="m_4 wow fadeInUp" data-wow-delay="0.4s">
+			关于千寻
+        </h1>
+        <p class="m_5 wow bounce" data-wow-delay="0.4s">
+				About qianhe
+        </p>
+       <div class="about_grid1">
+         <div class="col-md-4 box1 wow fadeInLeft" data-wow-delay="0.4s">
+        	<img src="{{ url_for('static',filename ='images/abb.jpg') }}" class="img-responsive" alt=""/>
+         </div>
+         <div class="col-md-8 box2 wow fadeInRight" data-wow-delay="0.4s">
+           <h3><a href="#">这只是一个兴趣使然的小网站，耗时将近半个月的时间...</a></h3>
+		   <p>它有许多不足之处，需要改进，还处于一个完善阶段，但我希望做的更好，有问题请扫描加我QQ向我反映</p>
+		   <p>It has a lot of shortcomings, need to improve, is still in a perfect stage, but I hope to do better, there is a problem please scan and add my QQ to report to me.</p>
+         </div>
+         <div class="clearfix"> </div>
+       </div>
+	  </div>
+	</div>
+</div>
+<div class="facts">
+	<div class="container">
+		<h2 class="m_6 wow fadeInUp" data-wow-delay="0.4s">
+			有趣的事实
+        </h2>
+        <p class="m_5 wow fadeInRight" data-wow-delay="0.4s">
+           In pede maliquet sit amet euismod in auctor ut ligula
+        </p>
+        <div class="about_grid2">
+           <div class="col-md-4 box_5 wow fadeInLeft" data-wow-delay="0.4s">
+          	        <div class="put-left-abs">
+                        <p class="text_6 color_1">1200+</p>
+                    </div>
+                    <div class="caption">
+                        <h3>第一个事实</h3>
+						<p>
+                            人把舌头伸出来，会无法呼吸
+                        </p>
+                    </div>
+             </div>
+          	 <div class="col-md-4 box_5 wow fadeInUp" data-wow-delay="0.4s">
+          	        <div class="put-left-abs">
+                        <p class="text_6 color_1">30+</p>
+                    </div>
+                    <div class="caption">
+                        <h3>第二个事实</h3>
+						<p>
+                            你正在尝试这样做，像个小狗狗一样
+                        </p>
+                    </div>
+             </div>
+          	  <div class="col-md-4 box_5 wow fadeInRight" data-wow-delay="0.4s">
+          	        <div class="put-left-abs">
+                        <p class="text_6 color_1">8000+</p>
+                    </div>
+                    <div class="caption">
+                        <h3>第三个事实</h3>
+						<p>
+                            看到这里，你必须得承认我很帅...
+                        </p>
+                    </div>
+             </div>
+        </div>
+	</div>
+</div>
+<div class="comment">
+	<div class="container">
+	  <div class="about_box1">
+	  	<h2 class="m_7 wow bounce" data-wow-delay="0.4s">
+			关于千寻的含义
+        </h2>
+        <p class="m_5 wow bounceIn" data-wow-delay="0.4s">
+		   众里寻他千百度，蓦然回首灯火阑珊处，总会有那么一个你在等的人在等你...
+		   The crowd to find his thousands of baidu, suddenly look back at the lights dim, there is always a person you are waiting for you...
+        </p>
+        <p class="m_8 wow bounceInDown" data-wow-delay="0.4s">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+	    <div class="author wow bounceInUp" data-wow-delay="0.4s">
+            <h4>Natalie Barnes</h4>
+            <p class="m_9">Client, USA</p>
+        </div>
+	  </div>
+	</div>
+</div>
+<div class="footer">
+	<div class="container">
+		<div class="cssmenu wow fadeInLeft" data-wow-delay="0.4s">
+		  <ul>
+			<li><a href="index.html">家</a></li> 
+			<li class="active"><a href="about.html">关于</a></li>
+			<li><a href="profiles.html">Add Profile</a></li>
+			<li><a href="contact.html">Contact</a></li>
+		  </ul>
+	    </div>
+	    <div class="copy wow fadeInUp" data-wow-delay="0.4s">
+			<p>Copyright &copy; 2016.Company name All rights reserved.More Templates</p>
+		</div>
+		<div class="social wow fadeInRight" data-wow-delay="0.4s"> 
+			<ul class="footer_social">
+			  <li><a href="#"> <i class="fb"> </i> </a></li>
+			  <li><a href="#"> <i class="tw"> </i> </a></li>
+		   </ul>
+		</div>
+	    <div class='clearfix'> </div>
+	</div>
+</div>
+</body>
+</html>		

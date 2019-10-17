@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Other_message_board</title>
+
 <link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
 
 <link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
@@ -13,7 +14,37 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
+<script>
+	$(function(){
+		$("form").submit(function(){
+			var content= $("#content").val()
+			$.ajax({
+				type: "GET",
+				contentType: "application/json; charset=UTF-8",
+				dataType: "json",
+				url: "/mg_search",
+				data: "mg="+content,
+				timeout:1000,
+				success:function(data){
+					if (data[0].error==0){
+						for (var j=0;j<3;j++){
+						$("#bbb").remove()}
+						for (var i=1;i<data.length;i++){
+							$("#aab").append("<div class='profile_left_mb'><div class='head_photo'><img src='"+"/static/"+data[i].head_p+"'"+"class='img-responsive' alt=''/>"+"</div>"+"<div class='cont span_2_of_profile mb_line'>"+"<div><a href='single.html?"+data[i].uid+"'>"+"<span class='uname'>"+data[i].ma_name+"</span><span class='pub_time'>***"+data[i].pub_time+"</span></a></div>"+"<p style='font-size: 1.5em;word-break: break-all;'>"+data[i].mg_text+"</p>"+"</div>"+"</div>")
+						}
+					}else{
+						alert("用户留言不符合规则，留言字数最高320!")
+					}
+				},
+				error:function(){
+					alert("网络错误")
+				}
+			
+			})
+			return false;
+		})
+		})
+</script>
 <link href="{{ url_for('static',filename ='css/touxiang.css') }}" rel='stylesheet' type='text/css' />
 <script src="{{ url_for('static',filename ='js/wow.min.js') }}"></script>
 <script src="{{ url_for('static',filename ='js/jquery-1.11.1.min.js') }}"></script>
@@ -35,6 +66,15 @@
 		</div>
 		<div class="header_right">
 			<ul class="header_user_info">
+					{% if name %}
+					<a class="login" href="/single.html?id={{uid}}">
+					<li class="user_desc"><span class="m_1">欢 迎，{{ name }}!</span></li>
+					<div class="clearfix"> </div>
+					</a>
+					<div class="clearfix"> </div>
+				</ul>
+				<a href="log" class="btn1 btn-1 btn1-1b">注销</a>
+				{% else %}
 			  <a class="login" href="login.html">
 				<li class="user_desc"><span class="m_1">已有账户 ? </span>登陆</li>
 				<i class="user"> </i> 
@@ -43,6 +83,7 @@
 			  <div class="clearfix"> </div>
 	    	</ul>
 			<a href="register.html" class="btn1 btn-1 btn1-1b">注册</a>
+			{% endif %}
 		</div>
 		<div class="clearfix"> </div>
 	</div>
@@ -54,11 +95,11 @@
 	<div class="cssmenu"> 
 	   <ul>
 		<li><a href="/">主页</a></li> 
-		<li><a href="about.html">关于</a></li>
-		<li><a href="profiles.html">Add Profile</a></li>
-		<li><a href="user_center">个人信息</a></li>
-		<li><a href="my_message_board.html">留言板</a></li>
-		<li><a href="contact.html">联系</a></li>
+		<li><a href="/about">关于</a></li>
+		
+		<li><a href="/single.html?id={{uid}}">个人信息</a></li>
+		<li><a href="/other_message_board?id={{uid}}&aspx=1">留言板</a></li>
+		<li><a href="/my_photos">照片墙</a></li>
 	  </ul>
 	</div>
 </div>
@@ -67,7 +108,7 @@
 	<p style="color:plum">Ta的留言：</p>
 	{% if messages %}
 	{% for m in messages %}
-	<div class=" profile_left_mb">
+	<div class=" profile_left_mb" id="bbb">
 			<div class="head_photo">
 			<img src="{{ url_for('static',filename =m[3]) }}" class="img-responsive" alt=""/>
 			</div>
@@ -81,6 +122,8 @@
 	{% else %}
 		<p>Ta还没有留言哦，快抢沙发吧！</p>
 	{% endif %}
+	<div id="aab">
+	</div>
 </div>
 <div class="mb_form wow fadeInUp" data-wow-delay="0.4s">
 		<form action="/other_message_board" method="POST">
@@ -105,7 +148,23 @@
 					outline:none;">提交</button></li>
 			</table>
 		</form>
+		<div>
+			<p>  </p>
+		</div>
+		<div style="text-align: center;            margin-top: 50px;">
+				<p>当前在第{{d_cont}}页,总共有{{ f_cont }}页</p>
+				{% for i in dpc %}
+				{% if i == d_cont%}
+				<a href="/other_message_board?id={{other_uid}}&aspx={{d_cont}}" style="  text-decoration: none;            border:1px solid #f9d52b;            padding: 5px 7px;            color: #767675;            cursor: pointer; ">{{d_cont}}</a>
+				{% else %}
+				<a href="/other_message_board?id={{other_uid}}&aspx={{i}}">{{ i }}</a>
+				{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+
 </div>
+
 </div>
 
 <div class="footer mb_footer">

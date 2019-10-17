@@ -4,6 +4,9 @@
 <title>家</title>
 <link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
 <link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,14 +89,14 @@
 			<img src="{{ url_for('static',filename ='images/rate.png') }}" alt=""/>
 		</div>
 		<div class="logo">
-			<a href="index"><img src="{{ url_for('static',filename ='images/logo.png')}}" alt=""/>
+			<a href="/"><img src="{{ url_for('static',filename ='images/logo.png')}}" alt=""/>
 				<span>千寻</span>
 			</a>
 		</div>
 		<div class="header_right">
 			<ul class="header_user_info">
 			{% if name %}
-			<a class="login" href="#">
+			<a class="login" href="/single.html?id={{uid}}">
 			<li class="user_desc"><span class="m_1">欢 迎，{{ name }}!</span></li>
 			<div class="clearfix"> </div>
 			</a>
@@ -120,7 +123,7 @@
 		   <h2>Find a perfect date</h2>
 		   <h1>分享您的完美时刻 </h1>
 		   <ul class="button">
-			 <li><a href="#" class="btn1 btn2 btn-1 btn1-1b">开始使用</a></li>
+			 <li><a href="/my_photos" class="btn1 btn2 btn-1 btn1-1b">开始使用</a></li>
 			 <li><a href="#" class="btn1 btn2 btn-1 btn1-1b">了解更多</a></li>
 		   </ul>
 	   </div>

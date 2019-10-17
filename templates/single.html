@@ -3,7 +3,9 @@
 <head>
 <title>other_center</title>
 <link href="{{ url_for('static',filename ='css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
-
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
 <link href="{{ url_for('static',filename ='css/style.css') }}" rel='stylesheet' type='text/css' />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,11 +67,11 @@
 	<div class="cssmenu"> 
 	   <ul>
 		<li><a href="/">家</a></li> 
-		<li><a href="about.html">关于</a></li>
-		<li><a href="profiles.html">Add Profile</a></li>
-		<li><a href="user_center.html">个人信息</a></li>
-		<li><a href="my_message_board.html">留言板</a></li>
-		<li><a href="contact.html">联系</a></li>
+		<li><a href="/about">关于</a></li>
+		
+		<li><a href="single.html?id={{uid}}">个人信息</a></li>
+		<li><a href="/other_message_board?id={{uid}}&aspx=1">留言板</a></li>
+		<li><a href="/my_photos">照片墙</a></li>
 	  </ul>
 	</div>
 </div>
@@ -83,7 +85,7 @@
 				   <li class="cate_head">给  Ta  留言</li>
 				   <li class="cate_right">
 				   	 <ul class="list1">
-				   	    <li><a href="other_message_board?{{other_id}}"><i class="heart"> </i></a></li>
+				   	    <li><a href="other_message_board?{{other_id}}&aspx=1"><i class="heart"> </i></a></li>
 				   	 </ul>
 				   </li>
 				   <div class="clearfix"> </div>
@@ -108,170 +110,60 @@
 				</table>
 			
 			</div>
+			
 		</div>
+		
 	</br>
-	<h3>个人简介</h3>
-	<p style="font-size: 20px; margin-top: 20px;">{{ about }}</p>
+	<div class="w3l_inner_section">
+			<div class="container">
+				   <div class="wthree_title_agile">
+	<h3 style="font-size: 2.5em;">个人简介</h3>
+	<p style="font-size: 20px; margin-top: 20px;"><i class="fa fa-heart-o" aria-hidden="true"></i>{{ about }}</i></p>
 	</div>
+	</div>
+	</div>
+	</div>
+	<div class="w3l_inner_section">
+			<div class="container">
+				   <div class="wthree_title_agile">
+						<h2>my  <span>photo</span></h2>
+						<p><i class="fa fa-heart-o" aria-hidden="true"></i></p>
+						
+					</div>
+				 <p class="sub_para">WE ARE GETTING MARRIED</p>
+		
+				
+				 <div class="inner_w3l_agile_grids">
+					{% if query %}
+					{% for i in query %}	
+					<div class="col-md-4 w3_tabs_grid">
+							<div class="grid">
+								<a href="{{url_for('static',filename =i[0])}}" class="lsb-preview" data-lsb-group="header">
+									<figure class="effect-winston">
+										<img src="{{url_for('static',filename =i[0])}}" class="img-responsive" alt=" " style="width: 500px;height: 250px;"/>
+										<figcaption>
+											<p>
+												<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+												<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+												<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+											</p>
+										</figcaption>			
+									</figure>
+								</a>
+							</div>
+						</div>
+		{% endfor %}
+		{% else %}
+		<h2>这里什么都没有呢，上传照片展示下自己吧~<h2></h2>
+		{% endif %}
+	</div>
+		<div class="clearfix"> </div>
+					</div>
+			</div>
+		</div>
 </div>
 
-<div class="w3l_inner_section">
-	<div class="container wow fadeInUp" data-wow-delay="0.4s">
-		<div class="wthree_title_agile">
-			<h2>my  <span>photos</span></h2>
-			<p><i class="fa fa-heart-o" aria-hidden="true"></i></p>		
-		</div>
-		<p class="sub_para">WE ARE GETTING MARRIED</p>
-		<div class="inner_w3l_agile_grids">
-		<div class="col-md-4 w3_tabs_grid">
 
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g1.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g1.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid w3_tabs_grid_sub">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid w3_tabs_grid_sub">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid w3_tabs_grid_sub">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="col-md-4 w3_tabs_grid">
-		<div class="grid">
-			<a href="{{ url_for('static',filename ='images/g2.jpg') }}" class="lsb-preview" data-lsb-group="header">
-				<figure class="effect-winston">
-					<img src="{{ url_for('static',filename ='images/g2.jpg') }}" class="img-responsive" alt=" " />
-					<figcaption>
-						<p>
-							<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-						</p>
-					</figcaption>			
-				</figure>
-			</a>
-		</div>
-	</div>
-	<div class="clearfix"> </div>
-				</div>
-		</div>
-	</div>
 
 <script type="text/javascript" src="{{ url_for('static',filename ='js/jquery-2.1.4.min.js') }}"></script>
  <script src="{{ url_for('static',filename ='js/lsb.min.js') }}"></script>
