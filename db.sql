@@ -60,14 +60,14 @@ create table user_pic (
 -- mg_id(留言id,从0开始)
 -- mg_user_id(留言用户id，外键约束)
 -- mg_text(留言内容)
---pub_time(留言时间)
+-- pub_time(留言时间)
 -- error（留言状态，0,正常，1删除）
 create table user_meg (
     uid4 int unsigned not null,
     mg_id int not null,
     mg_user_id int unsigned not null,
     mg_text varchar(320) not null,
-    pud_time datetime not null,
+    pub_time datetime not null,
     error enum("0","1"),
     foreign key(uid4) references user_web(uid1),
     foreign key(mg_user_id) references user_web(uid1)

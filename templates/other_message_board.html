@@ -30,7 +30,7 @@
 						for (var j=0;j<3;j++){
 						$("#bbb").remove()}
 						for (var i=1;i<data.length;i++){
-							$("#aab").append("<div class='profile_left_mb'><div class='head_photo'><img src='"+"/static/"+data[i].head_p+"'"+"class='img-responsive' alt=''/>"+"</div>"+"<div class='cont span_2_of_profile mb_line'>"+"<div><a href='single.html?"+data[i].uid+"'>"+"<span class='uname'>"+data[i].ma_name+"</span><span class='pub_time'>***"+data[i].pub_time+"</span></a></div>"+"<p style='font-size: 1.5em;word-break: break-all;'>"+data[i].mg_text+"</p>"+"</div>"+"</div>")
+							$("#aab").append("<div class='profile_left_mb' id='bbb'><div class='head_photo'><img src='"+"/static/"+data[i].head_p+"'"+"class='img-responsive' alt=''/>"+"</div>"+"<div class='cont span_2_of_profile mb_line'>"+"<div><a href='single.html?"+data[i].uid+"'>"+"<span class='uname'>"+data[i].ma_name+"</span><span class='pub_time'>***"+data[i].pub_time+"</span></a></div>"+"<p style='font-size: 1.5em;word-break: break-all;'>"+data[i].mg_text+"</p>"+"</div>"+"</div>")
 						}
 					}else{
 						alert("用户留言不符合规则，留言字数最高320!")
